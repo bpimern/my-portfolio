@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { FaUser, FaEnvelope } from "react-icons/fa";
 import { IoIosPaper } from "react-icons/io";
 import { MdWork, MdOutlineClose } from "react-icons/md";
@@ -23,12 +23,18 @@ const Home = () => {
   const ref = useRef();
 
   useEffect(() => {
-    document.body.addEventListener("click", (e) => {
-      if (e.target.contains(ref.current)) {
+    const handleClickOutside = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) {
         setSidenav(false);
       }
-    });
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
+
   return (
     <div className="w-full lgl:w-[85%] h-full lgl:h-[85%] bg-transparent text-white z-50 flex items-start justify-between p-4 lgl:p-0">
       {/* ================= Left Icons End here ======================== */}
@@ -47,27 +53,36 @@ const Home = () => {
         {/* ======= Home Icon End */}
 
         {/* ============= Sidenav Start here ============= */}
-        {sidenav && (
-          <div className="w-full h-screen fixed top-0 left-0 bg-black bg-opacity-50 z-50">
-            <div className="w-96 h-full relative">
-              <motion.div
-                ref={ref}
-                initial={{ x: -500, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.5 }}
-                className="w-full h-full bg-bodyColor overflow-y-scroll scrollbar-thin scrollbar-thumb-[#646464]"
-              >
-                <Sidenav />
-                <span
-                  onClick={() => setSidenav(false)}
-                  className="absolute top-0 -right-16 w-12 h-12 bg-bodyColor text-2xl text-textColor hover:text-designColor duration-300 cursor-pointer flex items-center justify-center z-50"
+        <AnimatePresence>
+          {sidenav && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="w-full h-screen fixed top-0 left-0 bg-black bg-opacity-50 z-50"
+            >
+              <div className="w-96 h-full relative">
+                <motion.div
+                  ref={ref}
+                  initial={{ x: -500, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  exit={{ x: -500, opacity: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="w-full h-full bg-bodyColor overflow-y-scroll scrollbar-thin scrollbar-thumb-[#646464]"
                 >
-                  <MdOutlineClose />
-                </span>
-              </motion.div>
-            </div>
-          </div>
-        )}
+                  <Sidenav />
+                  <span
+                    onClick={() => setSidenav(false)}
+                    className="absolute top-0 -right-16 w-12 h-12 bg-bodyColor text-2xl text-textColor hover:text-designColor duration-300 cursor-pointer flex items-center justify-center z-50"
+                  >
+                    <MdOutlineClose />
+                  </span>
+                </motion.div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
         {/* ============= Sidenav End here =============== */}
         {/* ======= Other Icons Start */}
         <div className="w-full h-80 bg-bodyColor rounded-3xl flex flex-col items-center justify-between py-6">

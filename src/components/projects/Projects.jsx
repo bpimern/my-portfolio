@@ -12,6 +12,57 @@ import {
 import Title from "../home/Title";
 import ProjectsCard from "./ProjectsCard";
 
+// const projectsData = [
+//   {
+//     title: "Blog Website",
+//     category: "Website",
+//     href: "https://www.youtube.com/@reactjsBD",
+//     image: workImgThree,
+//   },
+//   {
+//     title: "Business Card Design",
+//     category: "Design",
+//     href: "https://www.youtube.com/@reactjsBD",
+//     image: workImgOne,
+//   },
+//   {
+//     title: "Infinity Logo",
+//     category: "Logo",
+//     href: "https://www.youtube.com/@reactjsBD",
+//     image: workImgTwo,
+//   },
+//   {
+//     title: "Mobile Application",
+//     category: "Shopping",
+//     href: "https://www.youtube.com/@reactjsBD",
+//     image: workImgFive,
+//   },
+//   {
+//     title: "Responsive website",
+//     category: "E-commerce",
+//     href: "https://www.youtube.com/@reactjsBD",
+//     image: workImgFour,
+//   },
+//   {
+//     title: "Graphics Design",
+//     category: "Design",
+//     href: "https://www.youtube.com/@reactjsBD",
+//     image: workImgSix,
+//   },
+//   {
+//     title: "Ideas & Blog",
+//     category: "Website",
+//     href: "https://www.youtube.com/@reactjsBD",
+//     image: workImgEight,
+//   },
+//   {
+//     title: "ZOSS Logo",
+//     category: "Logo",
+//     href: "https://www.youtube.com/@reactjsBD",
+//     image: workImgSeven,
+//   },
+// ];
+
 const Projects = () => {
   return (
     <div>
@@ -46,7 +97,7 @@ const Projects = () => {
             image={workImgFour}
           />
           <ProjectsCard
-            title="Grapic Design"
+            title="Graphics Design"
             category="Design"
             image={workImgSix}
           />

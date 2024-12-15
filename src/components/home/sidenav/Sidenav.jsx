@@ -1,5 +1,5 @@
-import React from 'react'
-import SidenavTitle from './SidenavTitle';
+import React from "react";
+import SidenavTitle from "./SidenavTitle";
 
 const Sidenav = () => {
   return (
@@ -29,11 +29,11 @@ const Sidenav = () => {
       </ul>
       <SidenavTitle title="R" subTitle="each Me" />
       <ul>
-        <li className="sidenavLi">+968 24769821</li>
+        <li className="sidenavLi">+22 256 235 489</li>
         <li className="sidenavLi">noor.jsdivs@gmail.com</li>
       </ul>
     </div>
   );
-}
+};
 
-export default Sidenav
+export default Sidenav;

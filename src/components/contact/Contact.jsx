@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { FiSend } from "react-icons/fi";
 import Title from "../home/Title";
+import { motion } from "motion/react";
 
 const Contact = () => {
   const [clientName, setClientName] = useState("");
@@ -13,7 +14,7 @@ const Contact = () => {
   const [errEmail, setErrEmail] = useState(false);
   const [errMessages, setErrMessage] = useState(false);
   // ================= Error Messages End here ===================
-  const [seuccessMsg, setSuccessMsg] = useState("");
+  const [successMsg, setSuccessMsg] = useState("");
   // ================= Email Validation Start here ===============
   const EmailValidation = (email) => {
     return String(email)
@@ -51,11 +52,14 @@ const Contact = () => {
       setErrMessage(true);
     }
     if (clientName && email && EmailValidation(email) && messages) {
-      axios.post("https://getform.io/f/e18ee560-5133-4cfe-9a48-eddb6f012a9f", {
+      // Need to add your getForm.io api address
+      const response = axios.post("", {
         name: clientName,
         email: email,
         message: messages,
       });
+      console.log("response", response);
+
       setSuccessMsg(
         `Hello dear ${clientName}, Your messages has been sent successfully. Thank you for your time!`
       );
@@ -93,16 +97,21 @@ const Contact = () => {
             <span className="bg-designColor text-gray-700 text-sm font-titleFont font-medium px-2 rounded-md flex items-center justify-center">
               Freelance:
             </span>
-            Abailable
+            Available
           </p>
         </div>
       </div>
       <div className="w-full mt-10">
         <Title title="Send" subTitle="Messages" />
-        {seuccessMsg ? (
-          <p className="text-center text-base font-titleFont p-20 text-designColor">
-            {seuccessMsg}
-          </p>
+        {successMsg ? (
+          <motion.p
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.2, ease: "easeIn" }}
+            className="text-center text-base font-titleFont p-20 text-designColor"
+          >
+            {successMsg}
+          </motion.p>
         ) : (
           <form
             id="form"
@@ -119,7 +128,6 @@ const Contact = () => {
                     ? "border-red-600 focus-visible:border-red-600"
                     : "border-zinc-600 focus-visible:border-designColor"
                 } w-full bg-transparent border-2 px-4 py-2 text-base text-gray-200 outline-none duration-300`}
-                // className="w-full bg-transparent border-2 px-4 py-2 text-base text-gray-200 border-zinc-600 focus-visible:border-designColor outline-none duration-300"
                 type="text"
                 placeholder="Full Name"
               />
